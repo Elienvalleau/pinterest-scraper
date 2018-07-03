@@ -44,7 +44,12 @@ class PinterestHelper(object):
         password_elem.send_keys(Keys.RETURN)
         randdelay(2, 4)
 
-    def runme(self, url, threshold=500):
+    # def runme(self, url, threshold=500):
+    def runme(self, url):
+        if len(sys.argv) > 2:
+            threshold = int(sys.argv[2])
+        else:
+            threshold = 1
         final_results = []
         previmages = []
         tries = 0
@@ -64,6 +69,7 @@ class PinterestHelper(object):
                         src = i.get_attribute("src")
                         if src:
                             if src.find("/236x/") != -1 or src.find("/474x/") != 1:
+                                print("src")
                                 print(src)
                                 src = src.replace("/236x/", "/736x/")
                                 src = src.replace("/474x/", "/736x/")
@@ -91,7 +97,7 @@ def main():
         term = sys.argv[1]
     else:
         print("\n\n[Error] Need arguments in this format:")
-        print("pinScraper.py <search term> <destination dir[optional]>\n\n")
+        print("python scraper.py <search term> <how many scroll down> <destination dir[optional]>\n\n")
         exit()
     ph = PinterestHelper(PINTEREST_USERNAME, PINTEREST_PASSWORD)
     is_url = urllib.parse.urlparse(term)
@@ -99,16 +105,20 @@ def main():
         images = ph.runme(term)
     else:
         images = ph.runme('http://pinterest.com/search/pins/?q=' + urllib.parse.quote(term))
+    print("images")
     print(images)
     ph.close()
     with open(term.replace(" ", "") + "_pins.txt", "w") as file:
         file.write('\n'.join([i.decode('UTF-8') for i in images]))
-    if len(sys.argv) > 2:
-        destination = sys.argv[2]
+    if len(sys.argv) > 3:
+        destination = sys.argv[3]
     else:
         destination = "./" + term.replace(" ", "")
 
+    print("term / destination")
     print(term, destination)
+
+    # download images
     call('aria2c -i ./{}_pins.txt -d {} --continue --auto-file-renaming false'.format(term.replace(" ", ""),
                                                                                       destination),
          shell=True)
