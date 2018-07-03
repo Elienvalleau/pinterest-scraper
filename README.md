@@ -21,10 +21,10 @@ Now you can take the URL to any Pinterest board (or a CSV of a bunch of boards) 
 - Add your username / password to config.py
 
 - Then use:
-	- `./scraper.py <search term | board url> <destination folder[optional]>`
+	- `python scraper.py <search term | board url> <destination folder[optional]>`
 - For example: 
-	- `./scraper.py "Persian cats" ./persian_cats`
-	- `./scraper.py https://pinterest.com/kuxbini/cute-pets/ ./persian_cats`
+	- `python scraper.py "Persian cats" ./persian_cats`
+	- `python scraper.py https://pinterest.com/kuxbini/cute-pets/ ./persian_cats`
 	
 ## Use in a script
 
