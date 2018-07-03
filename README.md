@@ -21,10 +21,10 @@ Now you can take the URL to any Pinterest board (or a CSV of a bunch of boards) 
 - Add your username / password to config.py
 
 - Then use:
-	- `python scraper.py <search term | board url> <destination folder[optional]>`
+	- `python scraper.py <search term | board url> <how many scroll down [default=1]> <destination folder[optional]>`
 - For example: 
-	- `python scraper.py "Persian cats" ./persian_cats`
-	- `python scraper.py https://pinterest.com/kuxbini/cute-pets/ ./persian_cats`
+	- `python scraper.py "Persian cats" 5 ./persian_cats`
+	- `python scraper.py https://pinterest.com/kuxbini/cute-pets/ 5 ./persian_cats`
 	
 ## Use in a script
 
@@ -38,11 +38,3 @@ images = ph.runme("Persian Cats")
 # Use a image board url instead
 images = ph.runme("https://pinterest.com/kuxbini/cute-pets/")
 ```
-
-
-# Changes
-- [x] Pinterest now uses /474x/ files instead of /236x/ . So changed it to 474x in the url search
-- [x] Changed to Chrome driver
-- [x] Moved to python 3
-- [x] removed dependency on pandas, pickle
-- [x] runs as a script with syntax ./scraper.py <search term | board url> <destination folder[optional]>
